@@ -1,0 +1,48 @@
+# Raíz del repo .NET: las reglas de estilo viven aquí y no en cada editor.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{csproj,props,targets,json,yaml,yml}]
+indent_size = 2
+
+[*.cs]
+# Usings: System primero y sin separar por grupos, como ya están los ficheros existentes.
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Preferencias que reflejan el estilo actual del código (var explícito solo cuando el tipo es obvio).
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_elsewhere = false:suggestion
+csharp_prefer_braces = true:warning
+csharp_style_namespace_declarations = file_scoped:warning
+
+# Nombres: interfaces con I, tipos en PascalCase, campos privados _camelCase.
+# Los métodos quedan fuera a propósito: los tests se nombran en español con guiones bajos.
+dotnet_naming_rule.interfaces_begin_with_i.severity = warning
+dotnet_naming_rule.interfaces_begin_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_begin_with_i.style = prefix_i
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_style.prefix_i.required_prefix = I
+dotnet_naming_style.prefix_i.capitalization = pascal_case
+
+dotnet_naming_rule.types_pascal_case.severity = warning
+dotnet_naming_rule.types_pascal_case.symbols = types_and_members
+dotnet_naming_rule.types_pascal_case.style = pascal_case
+dotnet_naming_symbols.types_and_members.applicable_kinds = class, struct, enum, property, event
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.private_fields_underscore.severity = warning
+dotnet_naming_rule.private_fields_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_underscore.style = underscore_camel
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_style.underscore_camel.required_prefix = _
+dotnet_naming_style.underscore_camel.capitalization = camel_case

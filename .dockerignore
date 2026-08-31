@@ -1,0 +1,6 @@
+# Sin esto, los bin/ y obj/ de la maquina local entran al contexto de build y pueden
+# contaminar la compilacion dentro del contenedor (artefactos de otra arquitectura).
+**/bin/
+**/obj/
+**/*.user
+tests/

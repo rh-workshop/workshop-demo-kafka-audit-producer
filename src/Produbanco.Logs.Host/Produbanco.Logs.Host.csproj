@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- TargetFramework/Nullable/ImplicitUsings vienen de Directory.Build.props. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Produbanco.Logs.Host</AssemblyName>
+    <RootNamespace>Produbanco.Logs.Host</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Produbanco.Logs.Producer/Produbanco.Logs.Producer.csproj" />
+  </ItemGroup>
+</Project>

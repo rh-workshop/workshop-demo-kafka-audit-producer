@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- TargetFramework/Nullable/ImplicitUsings vienen de Directory.Build.props. -->
+  <PropertyGroup>
+    <PackageId>Produbanco.Logs.Producer</PackageId>
+    <Version>1.0.0</Version>
+    <Description>Cliente de logs de auditoria: Formato OTLP + Cifrado (Key Vault) + Publicacion a Kafka. Construido sobre Confluent.Kafka (open source).</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Confluent.Kafka: cliente Kafka oficial de Confluent para .NET.
+         Cifrado y compresion usan la BCL de .NET (AesGcm, System.IO.Compression). -->
+    <PackageReference Include="Confluent.Kafka" Version="2.6.1" />
+    <!-- Formato OTLP con librerias OFICIALES: Google.Protobuf (runtime oficial de Protocol
+         Buffers) + Grpc.Tools (genera las clases a partir de los .proto OFICIALES de
+         OpenTelemetry en Protos/). GrpcServices=None: solo mensajes, sin gRPC. -->
+    <PackageReference Include="Google.Protobuf" Version="3.28.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.66.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protos/**/*.proto" ProtoRoot="Protos" GrpcServices="None" />
+  </ItemGroup>
+</Project>

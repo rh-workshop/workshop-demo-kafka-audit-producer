@@ -1,0 +1,12 @@
+# Salidas de .NET
+bin/
+obj/
+*.user
+
+# Paquetes generados
+*.nupkg
+
+# IDE
+.idea/
+.vs/
+.vscode/
