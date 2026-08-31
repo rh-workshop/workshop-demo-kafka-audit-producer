@@ -1,4 +1,4 @@
-# workshop-demo-log-producer
+# workshop-demo-kafka-audit-producer
 
 Cliente de logs de auditoría para aplicaciones .NET. Cifra el evento y lo publica
 en Kafka, para que el pipeline lo enmascare y lo entregue al destino final.
@@ -33,7 +33,7 @@ dotnet pack -c Release
 
 El formato del payload cifrado, la derivación de llave y los nombres de los
 atributos OTLP deben coincidir **byte a byte** con
-[`workshop-demo-log-pipeline`](https://github.com/rh-workshop/workshop-demo-log-pipeline),
+[`workshop-demo-kafka-audit-pipeline`](https://github.com/rh-workshop/workshop-demo-kafka-audit-pipeline),
 que es quien descifra. Ambos lados congelan el mismo vector de interoperabilidad
 en sus pruebas: si uno cambia y el otro no, los mensajes acaban en la cola de
 descarte.
