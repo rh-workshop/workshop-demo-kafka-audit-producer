@@ -1,8 +1,12 @@
 <!-- Propiedades comunes a los tres proyectos, en un solo sitio: así una subida de
-     TargetFramework no puede quedar a medias en un .csproj y romper el paquete. -->
+     TargetFramework no puede quedar a medias en un .csproj y romper el paquete.
+
+     net10.0 es la LTS vigente, con soporte hasta noviembre de 2028. La 8.0 que había
+     antes entra en fin de vida el 10 de noviembre de 2026: entregar al cliente un
+     paquete atado a un runtime sin soporte lo obligaría a migrar de inmediato. -->
 <Project>
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>

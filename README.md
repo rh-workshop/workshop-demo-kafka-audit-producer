@@ -29,16 +29,14 @@ dotnet test
 dotnet pack -c Release
 ```
 
-El paquete apunta a **`net8.0`**, que es lo que fija a qué runtime se compila y por
-tanto qué aplicaciones pueden consumirlo. El `global.json` declara `8.0.100` como SDK
-**mínimo** con `rollForward: latestMajor`, de modo que un SDK más reciente también
-sirve para construirlo: la imagen de CI trae el 10 y con `latestMinor` la compilación
-fallaba con «A compatible .NET SDK was not found», porque esa política no cruza de una
-versión mayor a otra.
+El paquete apunta a **`net10.0`**, la LTS vigente (soporte hasta noviembre de 2028).
+Antes apuntaba a `net8.0`, que entra en **fin de vida el 10 de noviembre de 2026**:
+entregar un paquete atado a un runtime sin soporte obligaría al consumidor a migrar de
+inmediato.
 
-Fijar el SDK exacto obligaría a que la imagen de CI y cada puesto de trabajo tuvieran
-esa versión concreta instalada; lo que de verdad hay que fijar es el destino, y eso lo
-hace el `TargetFramework`.
+Quien integre esta librería debe apuntar también a `net10.0` o superior. El
+`TargetFramework` es lo que fija el runtime necesario, y por eso vive en un único
+`Directory.Build.props` en lugar de repetirse en cada `.csproj`.
 
 ## Contrato con el pipeline Java
 

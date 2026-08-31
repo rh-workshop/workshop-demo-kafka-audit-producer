@@ -1,6 +1,8 @@
-# Build: SDK .NET 8 (UBI) compila y publica el host + la libreria (Paquete NuGet).
-# Tag de rama (8.0) en vez de :latest, para que el build no cambie de major sin avisar.
-FROM registry.access.redhat.com/ubi8/dotnet-80:8.0 AS build
+# Build: SDK .NET 10 (UBI 9) compila y publica el host + la libreria (Paquete NuGet).
+# Tag fijado en vez de :latest, para que el build no cambie de version sin avisar. Es la MISMA
+# imagen que resuelve la tarea de pruebas del pipeline: si difirieran, el codigo podria pasar las
+# pruebas con un SDK y construirse con otro.
+FROM registry.access.redhat.com/ubi9/dotnet-100:9.8 AS build
 USER 0
 WORKDIR /src
 # Los csproj se copian primero para que la capa de restore se reaproveche mientras solo cambie
@@ -14,8 +16,8 @@ RUN dotnet restore src/RedHat.Workshop.KafkaAudit.Host
 COPY . .
 RUN dotnet publish src/RedHat.Workshop.KafkaAudit.Host -c Release --no-restore -o /app
 
-# Runtime: .NET 8 runtime UBI + libs nativas que necesita Confluent.Kafka (librdkafka)
-FROM registry.access.redhat.com/ubi8/dotnet-80-runtime:8.0
+# Runtime: .NET 10 runtime UBI 9 + libs nativas que necesita Confluent.Kafka (librdkafka)
+FROM registry.access.redhat.com/ubi9/dotnet-100-runtime:9.8
 USER 0
 RUN microdnf install -y cyrus-sasl-lib openssl-libs libzstd zlib && microdnf clean all
 USER 1001
