@@ -7,7 +7,7 @@ namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 public class KafkaTlsOptionsTests
 {
     private static KafkaTlsOptions Options(TimeSpan? flushTimeout = null) => new(
-        Bootstrap: "bank-kafka-kafka-bootstrap:9093",
+        Bootstrap: "demo-kafka-kafka-bootstrap:9093",
         Topic: "tp.observability.logs.encrypted",
         CertificateDir: "/opt/user",
         CaLocation: "/opt/ca/ca.crt",

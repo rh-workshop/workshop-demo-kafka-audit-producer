@@ -20,7 +20,7 @@ public sealed record HostOptions(
     string KeyInfo)
 {
     public static HostOptions FromEnvironment() => new(
-        Read("BOOTSTRAP", "bank-kafka-kafka-bootstrap:9093"),
+        Read("BOOTSTRAP", "demo-kafka-kafka-bootstrap:9093"),
         Read("TOPIC", "tp.observability.logs.encrypted"),
         Read("CERT_DIR", "/opt/user"),
         Read("CA_FILE", "/opt/ca/ca.crt"),
