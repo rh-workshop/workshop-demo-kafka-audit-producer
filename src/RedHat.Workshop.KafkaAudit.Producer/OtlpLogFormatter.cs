@@ -5,7 +5,7 @@ using OpenTelemetry.Proto.Common.V1;
 using OpenTelemetry.Proto.Logs.V1;
 using OpenTelemetry.Proto.Resource.V1;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Serializa un evento de auditoría a OTLP Protobuf (clases oficiales de OpenTelemetry). El esquema
 /// debe coincidir con el del pipeline Java: ambos escriben en el mismo tópico. Los nombres de
@@ -13,9 +13,9 @@ namespace Produbanco.Logs.Producer;
 public static class OtlpLogFormatter
 {
     private const string SchemaUrl = "https://opentelemetry.io/schemas/1.36.0";
-    private const string ScopeName = "Produbanco.Logs.Producer";
+    private const string ScopeName = "RedHat.Workshop.KafkaAudit.Producer";
     private const string ServiceVersion = "1.0.0";
-    private const string ServiceNamespace = "produbanco.audit";
+    private const string ServiceNamespace = "kafka-audit";
     private const string SeverityInfoText = "INFO";
 
     /// Longitud del span id según el spec de OTLP.

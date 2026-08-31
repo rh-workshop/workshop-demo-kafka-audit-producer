@@ -1,6 +1,6 @@
 using System.IO.Compression;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// <summary>
 /// Comprime el OTLP ANTES de cifrar: el dato cifrado (AES-256-GCM) es incompresible, por eso el

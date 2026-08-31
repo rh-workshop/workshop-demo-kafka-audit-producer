@@ -1,19 +1,19 @@
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Congela la derivación de llave: es el contrato con el processor Java, y si cambia sin que el
 /// otro extremo cambie igual, todos los mensajes acaban en la DLQ.
 public class KeyDerivationTests
 {
     /// Secreto de ejemplo con el formato que crea el runbook (`openssl rand -base64 32`).
-    private const string Secret = "cHJvZHViYW5jby1sYWItYWVzLTI1Ni1rZXktMDAwMDE=";
+    private const string Secret = "cmVkaGF0LXdvcmtzaG9wLWFlcy0yNTYta2V5LTAwMDE=";
 
     [Fact]
     public void La_derivacion_es_determinista()
     {
-        byte[] primera = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1);
-        byte[] segunda = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1);
+        byte[] primera = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2);
+        byte[] segunda = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2);
 
         Assert.Equal(primera, segunda);
     }
@@ -21,15 +21,15 @@ public class KeyDerivationTests
     [Fact]
     public void Produce_una_llave_de_256_bits()
     {
-        Assert.Equal(32, KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1).Length);
+        Assert.Equal(32, KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2).Length);
     }
 
     /// El `info` separa dominios: rotar su versión da una llave distinta sin tocar el Key Vault.
     [Fact]
     public void Un_info_distinto_da_una_llave_distinta()
     {
-        byte[] v1 = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1);
-        byte[] v2 = KeyDerivation.DeriveKey(Secret, "produbanco/audit-log/aes256gcm/v2");
+        byte[] v1 = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2);
+        byte[] v2 = KeyDerivation.DeriveKey(Secret, "redhat-workshop/kafka-audit/aes256gcm/v3");
 
         Assert.NotEqual(v1, v2);
     }
@@ -40,10 +40,10 @@ public class KeyDerivationTests
     [Fact]
     public void Vector_de_interoperabilidad_con_java()
     {
-        byte[] key = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1);
+        byte[] key = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2);
 
         Assert.Equal(
-            "c17fbdc63c0d2f384ba94aafa0782a9f7e11b0b7d11fe421f39f938927b15cbd",
+            "c7f17f9a0d99f34c31a67381b6d97354764b63ffdf433447e38232fe33987fb6",
             Convert.ToHexString(key).ToLowerInvariant());
     }
 
@@ -52,7 +52,7 @@ public class KeyDerivationTests
     [Fact]
     public void Fallback_utf8_cuando_no_es_base64()
     {
-        byte[] key = KeyDerivation.DeriveKey("passphrase-en-claro-del-vault", KeyDerivation.InfoV1);
+        byte[] key = KeyDerivation.DeriveKey("passphrase-en-claro-del-vault", KeyDerivation.InfoV2);
 
         Assert.Equal(
             "9aa31bce942588ea3ede5430bdd604460647912b568ad1aee1005697e98d399d",
@@ -68,7 +68,7 @@ public class KeyDerivationTests
     {
         const string conSalto = "cHJvZHViYW5jby1sYWItYWVz\nLTI1Ni1rZXktMDAwMDE=";
 
-        byte[] key = KeyDerivation.DeriveKey(conSalto, KeyDerivation.InfoV1);
+        byte[] key = KeyDerivation.DeriveKey(conSalto, KeyDerivation.InfoV2);
 
         // HKDF-SHA256 sobre los bytes UTF-8 del texto tal cual (con el salto de línea incluido).
         Assert.Equal(
@@ -76,7 +76,7 @@ public class KeyDerivationTests
             Convert.ToHexString(key).ToLowerInvariant());
         // Y nunca la llave del secreto "limpio": eso sería el comportamiento viejo de .NET.
         Assert.NotEqual(
-            KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1),
+            KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2),
             key);
     }
 }

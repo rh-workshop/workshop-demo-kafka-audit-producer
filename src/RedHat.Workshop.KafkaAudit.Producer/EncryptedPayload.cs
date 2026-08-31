@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Formato binario del payload cifrado: <c>version(1) || keyId(1) || IV(12) || ciphertext || tag(16)</c>.
 ///

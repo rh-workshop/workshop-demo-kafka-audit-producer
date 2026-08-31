@@ -1,4 +1,4 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Permite probar el flujo completo sin un broker Kafka delante.
 public interface ILogPublisher : IAsyncDisposable

@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Deriva la llave AES-256 del secreto montado, con HKDF-SHA256 (RFC 5869, aprobado en NIST
 /// SP 800-56C); el parámetro <c>info</c> ata la llave a su propósito. No se usa PBKDF2 ni Argon2
@@ -10,13 +10,13 @@ namespace Produbanco.Logs.Producer;
 public static class KeyDerivation
 {
     /// Etiqueta de propósito y versión. Al rotar la llave se sube la versión aquí y en el Java.
-    public const string InfoV1 = "produbanco/audit-log/aes256gcm/v1";
+    public const string InfoV2 = "redhat-workshop/kafka-audit/aes256gcm/v2";
 
     private const int KeyLengthBytes = 32;
 
     /// Sal fija y pública: HKDF no exige sal secreta, y la separación de dominios ya la da el
     /// <c>info</c>; fijarla mantiene la interoperabilidad sin transportarla en cada mensaje.
-    private static readonly byte[] Salt = Encoding.UTF8.GetBytes("produbanco.audit-log.salt.v1");
+    private static readonly byte[] Salt = Encoding.UTF8.GetBytes("redhat-workshop.kafka-audit.salt.v2");
 
     public static byte[] DeriveKey(string secret, string info) =>
         HKDF.DeriveKey(

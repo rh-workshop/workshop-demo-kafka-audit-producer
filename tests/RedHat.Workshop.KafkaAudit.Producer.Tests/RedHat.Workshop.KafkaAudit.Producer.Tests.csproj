@@ -9,9 +9,9 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/Produbanco.Logs.Producer/Produbanco.Logs.Producer.csproj" />
+    <ProjectReference Include="../../src/RedHat.Workshop.KafkaAudit.Producer/RedHat.Workshop.KafkaAudit.Producer.csproj" />
     <!-- El Host se referencia para poder probar HostOptions (la lectura del entorno). -->
-    <ProjectReference Include="../../src/Produbanco.Logs.Host/Produbanco.Logs.Host.csproj" />
+    <ProjectReference Include="../../src/RedHat.Workshop.KafkaAudit.Host/RedHat.Workshop.KafkaAudit.Host.csproj" />
   </ItemGroup>
   <ItemGroup>
     <!-- En un solo sitio, para no repetir el using en cada fichero de test. -->

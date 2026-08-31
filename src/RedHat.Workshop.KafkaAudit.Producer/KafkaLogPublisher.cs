@@ -1,6 +1,6 @@
 using Confluent.Kafka;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Publica en Kafka por mTLS con confirmación de todas las réplicas in-sync.
 public sealed class KafkaLogPublisher : ILogPublisher

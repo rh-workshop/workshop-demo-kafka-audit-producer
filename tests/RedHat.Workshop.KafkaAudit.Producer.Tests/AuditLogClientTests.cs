@@ -1,9 +1,9 @@
 using System.IO.Compression;
 using System.Text;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Verifica el orden de la tubería (formatear -> comprimir -> cifrar -> publicar) con dobles de
 /// prueba. Las interfaces existían justo para esto y no había un solo test que las usara.
@@ -80,7 +80,7 @@ public class AuditLogClientTests
         ServiceName: "bff-canal",
         ServiceInstanceId: "instancia-1",
         Environment: "dev",
-        Email: "juan.perez@produbanco.com",
+        Email: "juan.perez@ejemplo.com",
         Dni: "1712345678",
         Pan: "4539123456789010",
         Amount: 1234.56,

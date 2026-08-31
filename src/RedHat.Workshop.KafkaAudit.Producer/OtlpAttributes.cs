@@ -1,4 +1,4 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Nombres de los atributos OTLP del evento de auditoría: el contrato con el processor Java
 /// (`AuditAttributes`); los valores deben coincidir literalmente. Se centralizan porque un typo

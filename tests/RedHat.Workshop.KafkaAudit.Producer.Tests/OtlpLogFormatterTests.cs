@@ -1,9 +1,9 @@
 using Google.Protobuf;
 using OpenTelemetry.Proto.Logs.V1;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Verifica el mensaje OTLP que produce la biblioteca. El valor de estos tests es que convierten
 /// un typo en un nombre de atributo —que hoy compilaría y dejaría la PII sin enmascarar— en un
@@ -15,7 +15,7 @@ public class OtlpLogFormatterTests
     {
         var record = FirstRecord(Sample());
 
-        Assert.Equal("juan.perez@produbanco.com", Text(record, OtlpAttributes.CustomerEmail));
+        Assert.Equal("juan.perez@ejemplo.com", Text(record, OtlpAttributes.CustomerEmail));
         Assert.Equal("1712345678", Text(record, OtlpAttributes.CustomerDni));
         Assert.Equal("4539123456789010", Text(record, OtlpAttributes.CardPan));
     }
@@ -76,9 +76,9 @@ public class OtlpLogFormatterTests
     [Fact]
     public void El_tipo_de_evento_se_puede_personalizar()
     {
-        var record = FirstRecord(Sample() with { EventName = "com.produbanco.audit.login" });
+        var record = FirstRecord(Sample() with { EventName = "com.redhat.workshop.kafkaaudit.login" });
 
-        Assert.Equal("com.produbanco.audit.login", Text(record, OtlpAttributes.EventName));
+        Assert.Equal("com.redhat.workshop.kafkaaudit.login", Text(record, OtlpAttributes.EventName));
     }
 
     private static AuditEvent Sample() => new(
@@ -86,7 +86,7 @@ public class OtlpLogFormatterTests
         ServiceName: "bff-canal",
         ServiceInstanceId: "instancia-1",
         Environment: "dev",
-        Email: "juan.perez@produbanco.com",
+        Email: "juan.perez@ejemplo.com",
         Dni: "1712345678",
         Pan: "4539123456789010",
         Amount: 1234.56,

@@ -1,4 +1,4 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// API pública del paquete: formatea a OTLP, comprime, cifra y publica.
 ///

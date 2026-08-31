@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Host;
+namespace RedHat.Workshop.KafkaAudit.Host;
 
 /// Genera eventos ficticios para la demo. En producción los emiten los microservicios del Banco.
 ///
@@ -16,7 +16,7 @@ public sealed class FakeAuditEvents(string environment, int payloadBytes)
     private static readonly string[] Services =
         ["bff-canal", "escenario-negocio", "servicio-dominio", "acceso-core"];
 
-    private const string MailDomain = "@produbanco.com";
+    private const string MailDomain = "@ejemplo.com";
     private const string IdFormat = "NET-{0:D6}";
     private const string Channel = "web";
 

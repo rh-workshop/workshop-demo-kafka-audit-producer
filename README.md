@@ -5,11 +5,11 @@ en Kafka, para que el pipeline lo enmascare y lo entregue al destino final.
 
 ## Es una librería, no un servicio
 
-El entregable principal es el **paquete NuGet** `Produbanco.Logs.Producer`: lo
+El entregable principal es el **paquete NuGet** `RedHat.Workshop.KafkaAudit.Producer`: lo
 añaden como dependencia los microservicios que emiten auditoría, y se ejecuta
 dentro de ellos, en su propio namespace. No es un pod de la plataforma.
 
-`Produbanco.Logs.Host` es un ejecutable de ejemplo que demuestra la librería y
+`RedHat.Workshop.KafkaAudit.Host` es un ejecutable de ejemplo que demuestra la librería y
 sirve para validar el flujo de extremo a extremo.
 
 ## Qué hace

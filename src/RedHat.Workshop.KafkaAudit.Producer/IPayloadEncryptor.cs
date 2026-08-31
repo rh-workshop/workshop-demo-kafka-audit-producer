@@ -1,4 +1,4 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Permite sustituir el cifrado en los tests sin depender de una llave real.
 public interface IPayloadEncryptor

@@ -1,15 +1,15 @@
 using System.Security.Cryptography;
 using System.Text;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Cubre el cifrado del payload: el formato binario es el contrato con el processor Java, así que
 /// aquí se descifra "a mano" replicando lo que hace el otro extremo.
 public class PayloadEncryptorTests
 {
-    private const string Secret = "cHJvZHViYW5jby1sYWItYWVzLTI1Ni1rZXktMDAwMDE=";
+    private const string Secret = "cmVkaGF0LXdvcmtzaG9wLWFlcy0yNTYta2V5LTAwMDE=";
     private const string Topic = "tp.observability.logs.encrypted";
     private const byte KeyId = 1;
 
@@ -100,7 +100,7 @@ public class PayloadEncryptorTests
         byte[] ciphertext = raw[cipherStart..(cipherStart + cipherLength)];
         byte[] tag = raw[^EncryptedPayload.TagLength..];
 
-        byte[] key = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV1);
+        byte[] key = KeyDerivation.DeriveKey(Secret, KeyDerivation.InfoV2);
         using var aes = new AesGcm(key, EncryptedPayload.TagLength);
         byte[] plaintext = new byte[ciphertext.Length];
         aes.Decrypt(iv, ciphertext, tag, plaintext,

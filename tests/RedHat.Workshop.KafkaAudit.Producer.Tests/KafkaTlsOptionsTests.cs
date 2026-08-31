@@ -1,6 +1,6 @@
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Fija los nombres de fichero que monta Strimzi y el timeout de flush por defecto: si alguien
 /// los cambia, el pod arranca pero el handshake mTLS falla o el drenado al apagar se corta.

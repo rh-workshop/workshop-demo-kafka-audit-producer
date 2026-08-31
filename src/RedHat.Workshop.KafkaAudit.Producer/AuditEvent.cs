@@ -1,10 +1,10 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Valores por defecto del evento. Clase aparte porque C# no admite usar como valor por defecto
 /// de un parámetro una constante declarada en el propio tipo.
 public static class AuditEventDefaults
 {
-    public const string EventName = "com.produbanco.audit.transfer";
+    public const string EventName = "com.redhat.workshop.kafkaaudit.transfer";
     public const string Body = "Transferencia";
 }
 

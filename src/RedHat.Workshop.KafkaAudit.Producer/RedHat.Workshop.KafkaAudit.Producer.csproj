@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!-- TargetFramework/Nullable/ImplicitUsings vienen de Directory.Build.props. -->
   <PropertyGroup>
-    <PackageId>Produbanco.Logs.Producer</PackageId>
+    <PackageId>RedHat.Workshop.KafkaAudit.Producer</PackageId>
     <Version>1.0.0</Version>
     <Description>Cliente de logs de auditoria: Formato OTLP + Cifrado (Key Vault) + Publicacion a Kafka. Construido sobre Confluent.Kafka (open source).</Description>
   </PropertyGroup>

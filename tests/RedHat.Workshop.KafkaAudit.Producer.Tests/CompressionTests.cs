@@ -1,9 +1,9 @@
 using System.IO.Compression;
 using System.Text;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// El gzip que produce esta clase lo descomprime el processor Java con `java.util.zip`: el formato
 /// es estándar, pero conviene fijarlo con un test porque es parte del contrato entre ambos.
@@ -22,7 +22,7 @@ public class CompressionTests
     [Fact]
     public void Un_texto_repetitivo_ocupa_menos_comprimido()
     {
-        byte[] repetitivo = Encoding.UTF8.GetBytes(string.Concat(Enumerable.Repeat("produbanco", 500)));
+        byte[] repetitivo = Encoding.UTF8.GetBytes(string.Concat(Enumerable.Repeat("evento-de-auditoria", 500)));
 
         Assert.True(Compression.Compress(repetitivo).Length < repetitivo.Length);
     }

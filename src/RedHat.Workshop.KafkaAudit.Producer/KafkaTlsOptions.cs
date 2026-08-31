@@ -1,4 +1,4 @@
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Opciones de conexión mTLS, con los certificados que el operador monta desde el KafkaUser.
 ///

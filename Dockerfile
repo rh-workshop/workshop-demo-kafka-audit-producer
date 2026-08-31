@@ -8,11 +8,11 @@ WORKDIR /src
 # Directory.Build.props aporta el TargetFramework comun y global.json fija el SDK: sin ellos en
 # esta capa, el restore fallaria o resolveria con otro SDK que el resto del build.
 COPY Directory.Build.props global.json ./
-COPY src/Produbanco.Logs.Producer/Produbanco.Logs.Producer.csproj src/Produbanco.Logs.Producer/
-COPY src/Produbanco.Logs.Host/Produbanco.Logs.Host.csproj src/Produbanco.Logs.Host/
-RUN dotnet restore src/Produbanco.Logs.Host
+COPY src/RedHat.Workshop.KafkaAudit.Producer/RedHat.Workshop.KafkaAudit.Producer.csproj src/RedHat.Workshop.KafkaAudit.Producer/
+COPY src/RedHat.Workshop.KafkaAudit.Host/RedHat.Workshop.KafkaAudit.Host.csproj src/RedHat.Workshop.KafkaAudit.Host/
+RUN dotnet restore src/RedHat.Workshop.KafkaAudit.Host
 COPY . .
-RUN dotnet publish src/Produbanco.Logs.Host -c Release --no-restore -o /app
+RUN dotnet publish src/RedHat.Workshop.KafkaAudit.Host -c Release --no-restore -o /app
 
 # Runtime: .NET 8 runtime UBI + libs nativas que necesita Confluent.Kafka (librdkafka)
 FROM registry.access.redhat.com/ubi8/dotnet-80-runtime:8.0
@@ -21,4 +21,4 @@ RUN microdnf install -y cyrus-sasl-lib openssl-libs libzstd zlib && microdnf cle
 USER 1001
 COPY --from=build /app /app
 WORKDIR /app
-CMD ["dotnet", "Produbanco.Logs.Host.dll"]
+CMD ["dotnet", "RedHat.Workshop.KafkaAudit.Host.dll"]

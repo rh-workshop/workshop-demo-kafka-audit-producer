@@ -1,6 +1,6 @@
-namespace Produbanco.Logs.Host;
+namespace RedHat.Workshop.KafkaAudit.Host;
 
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Producer;
 
 /// Configuración del host, leída del entorno en un único sitio.
 ///
@@ -30,7 +30,7 @@ public sealed record HostOptions(
         ReadInt("PAYLOAD_BYTES", 0),
         // Identifica la llave dentro del payload, para poder rotarla sin perder lo ya publicado.
         (byte)ReadInt("KEY_ID", 1),
-        Read("KEY_INFO", KeyDerivation.InfoV1));
+        Read("KEY_INFO", KeyDerivation.InfoV2));
 
     private static string Read(string name, string fallback)
     {

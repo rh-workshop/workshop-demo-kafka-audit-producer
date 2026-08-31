@@ -1,6 +1,6 @@
-using Produbanco.Logs.Host;
+using RedHat.Workshop.KafkaAudit.Host;
 
-namespace Produbanco.Logs.Producer.Tests;
+namespace RedHat.Workshop.KafkaAudit.Producer.Tests;
 
 /// Fija la lectura de configuración del host. Lo crítico es el caso del valor mal escrito
 /// (RATE_MS=5O, con la letra O): debe ABORTAR, no caer al fallback en silencio — en una prueba de

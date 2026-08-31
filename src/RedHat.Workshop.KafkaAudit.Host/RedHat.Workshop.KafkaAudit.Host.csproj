@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- TargetFramework/Nullable/ImplicitUsings vienen de Directory.Build.props. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>RedHat.Workshop.KafkaAudit.Host</AssemblyName>
+    <RootNamespace>RedHat.Workshop.KafkaAudit.Host</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RedHat.Workshop.KafkaAudit.Producer/RedHat.Workshop.KafkaAudit.Producer.csproj" />
+  </ItemGroup>
+</Project>

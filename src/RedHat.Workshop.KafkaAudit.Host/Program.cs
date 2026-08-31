@@ -2,8 +2,8 @@ using System.Runtime.InteropServices;
 
 using Confluent.Kafka;
 
-using Produbanco.Logs.Host;
-using Produbanco.Logs.Producer;
+using RedHat.Workshop.KafkaAudit.Host;
+using RedHat.Workshop.KafkaAudit.Producer;
 
 // Host de demostración de la biblioteca: emite eventos ficticios hasta que se le pide parar.
 var options = HostOptions.FromEnvironment();

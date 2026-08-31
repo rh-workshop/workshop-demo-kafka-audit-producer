@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Produbanco.Logs.Producer;
+namespace RedHat.Workshop.KafkaAudit.Producer;
 
 /// Cifra el payload con AES-256-GCM. Salida: base64 del formato de <see cref="EncryptedPayload"/>.
 ///
@@ -20,7 +20,7 @@ public sealed class PayloadEncryptor : IPayloadEncryptor, IDisposable
     /// <param name="info">Etiqueta de propósito del HKDF; su versión se sube al rotar.</param>
     public PayloadEncryptor(string secret, byte keyId = 1, string? info = null)
     {
-        byte[] key = KeyDerivation.DeriveKey(secret, info ?? KeyDerivation.InfoV1);
+        byte[] key = KeyDerivation.DeriveKey(secret, info ?? KeyDerivation.InfoV2);
         _aes = new AesGcm(key, EncryptedPayload.TagLength);
         _keyId = keyId;
         // La llave ya está dentro de AesGcm: no hace falta dejar la copia local en el heap.
