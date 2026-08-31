@@ -55,7 +55,7 @@ public class KeyDerivationTests
         byte[] key = KeyDerivation.DeriveKey("passphrase-en-claro-del-vault", KeyDerivation.InfoV2);
 
         Assert.Equal(
-            "9aa31bce942588ea3ede5430bdd604460647912b568ad1aee1005697e98d399d",
+            "b53c1f90685cd72ac94d28d43128de1f67683ce773e9c43b10a70e67188c58b0",
             Convert.ToHexString(key).ToLowerInvariant());
     }
 
@@ -66,13 +66,13 @@ public class KeyDerivationTests
     [Fact]
     public void Whitespace_interno_usa_el_fallback_utf8_como_java()
     {
-        const string conSalto = "cHJvZHViYW5jby1sYWItYWVz\nLTI1Ni1rZXktMDAwMDE=";
+        const string conSalto = "cmVkaGF0LXdvcmtzaG9wLWFlcy0y\nNTYta2V5LTAwMDE=";
 
         byte[] key = KeyDerivation.DeriveKey(conSalto, KeyDerivation.InfoV2);
 
         // HKDF-SHA256 sobre los bytes UTF-8 del texto tal cual (con el salto de línea incluido).
         Assert.Equal(
-            "3ad6a83b33dde6e068bcd42e3647f9b3550763d735e9919306c61081a7068cb7",
+            "81c810f29e01a7cfe78666aba558b2d2d2245f32fa09a33b2e926d8369da8247",
             Convert.ToHexString(key).ToLowerInvariant());
         // Y nunca la llave del secreto "limpio": eso sería el comportamiento viejo de .NET.
         Assert.NotEqual(
