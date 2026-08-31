@@ -7,7 +7,17 @@ useDefault = true
 
 [[allowlists]]
 description = """Vector de prueba de la derivación de llave, no una credencial: la cadena decodifica \
-a 'redhat-workshop-aes-256-key-0001' y existe para que .NET y Java congelen el mismo resultado de \
-HKDF. Sin él no se puede detectar una divergencia del contrato entre ambos lenguajes."""
-paths = ['''.*tests/RedHat\.Workshop\.KafkaAudit\.Producer\.Tests/.*Tests\.cs''']
-regexes = ['''cmVkaGF0LXdvcmtzaG9wLWFlcy0yNTYta2V5LTAwMDE=''']
+a una constante de prueba y existe para que .NET y Java congelen el mismo resultado de HKDF. Sin él \
+no se puede detectar una divergencia del contrato entre ambos lenguajes.
+
+El escaneo recorre el HISTORIAL de commits, no solo el árbol de trabajo, así que la excepción tiene \
+que cubrir también la ruta y el valor anteriores al renombrado: un commit ya publicado no se puede \
+cambiar sin reescribir la historia, y aquí no hay ninguna credencial real que rotar."""
+paths = [
+  '''.*tests/RedHat\.Workshop\.KafkaAudit\.Producer\.Tests/.*Tests\.cs''',
+  '''.*tests/Produbanco\.Logs\.Producer\.Tests/.*Tests\.cs''',
+]
+regexes = [
+  '''cmVkaGF0LXdvcmtzaG9wLWFlcy0yNTYta2V5LTAwMDE=''',
+  '''cHJvZHViYW5jby1sYWItYWVzLTI1Ni1rZXktMDAwMDE=''',
+]

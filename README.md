@@ -29,6 +29,17 @@ dotnet test
 dotnet pack -c Release
 ```
 
+El paquete apunta a **`net8.0`**, que es lo que fija a qué runtime se compila y por
+tanto qué aplicaciones pueden consumirlo. El `global.json` declara `8.0.100` como SDK
+**mínimo** con `rollForward: latestMajor`, de modo que un SDK más reciente también
+sirve para construirlo: la imagen de CI trae el 10 y con `latestMinor` la compilación
+fallaba con «A compatible .NET SDK was not found», porque esa política no cruza de una
+versión mayor a otra.
+
+Fijar el SDK exacto obligaría a que la imagen de CI y cada puesto de trabajo tuvieran
+esa versión concreta instalada; lo que de verdad hay que fijar es el destino, y eso lo
+hace el `TargetFramework`.
+
 ## Contrato con el pipeline Java
 
 El formato del payload cifrado, la derivación de llave y los nombres de los
